@@ -1,0 +1,35 @@
+body {
+    width: 475px;
+    height: 210px;
+}
+
+.mainDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.mainDiv h1 {
+    text-align: center;
+}
+
+.btn {
+    padding: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 13px;
+    font-weight: bold;
+    background-color: cornsilk;
+    margin-left: 25px;
+}
+
+.btn:hover {
+    background-color: blue;
+    color: white;
+}
+
+.desp {
+    text-align: center;
+    font-size: 14px;
+}

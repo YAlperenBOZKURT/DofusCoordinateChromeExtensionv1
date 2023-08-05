@@ -1,0 +1,22 @@
+{
+    "manifest_version": 3,
+    "name": "Dofus Coordinate Extension",
+    "version": "1.0",
+    "description": "dofuspourlesnoobs gps coordinate converter",
+    "icons": {
+      "16": "icon16.png"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "activeTab",
+      "contextMenus",
+      "tabs",
+      "scripting"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
+  
