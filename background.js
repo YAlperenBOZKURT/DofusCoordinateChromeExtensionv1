@@ -1,4 +1,4 @@
-// We extract only the coordinates within the square brackets from the given input
+// We only extract the coordinates inside the closed brackets in the copied area in the appropriate format.
 
 function extractCoordinates(inputStr) {
   const regex = /[-+]?\s*\d+(\.\d+)?\s*,\s*[-+]?\s*\d+(\.\d+)?/g;
@@ -6,34 +6,34 @@ function extractCoordinates(inputStr) {
 
   if (matches && matches.length > 0) {
     const formattedCoordinates = matches.map((match) => {
-      const [lat, lon] = match.replace(/\s/g, '').split(',');
+      const [lat, lon] = match.replace(/\s/g, "").split(",");
       const formattedLat = parseFloat(lat).toFixed(0);
       const formattedLon = parseFloat(lon).toFixed(0);
       return `${formattedLat},${formattedLon}`;
     });
 
-    return `/travel ${formattedCoordinates.join(',')}`;
+    return `/travel ${formattedCoordinates.join(",")}`;
   }
 
-  return '';
+  return "";
 }
 
-// Function to be called when right-clicked
+// Function to be called when right-clicked.
 function onContextMenuClick(info, tab) {
   if (info.menuItemId === "myContextMenu" && info.selectionText) {
-    // Extract the text within the square brackets and convert it to the /travel format
+    // Conversion process from the text inside the closed brackets to the /travel format.
     const formattedText = extractCoordinates(info.selectionText);
     if (formattedText) {
       copyToClipboard(tab.id, formattedText);
     } else {
-      console.log("Incorrect format! Text within the square brackets not found.");
+      console.log("Hatalı format! Kapalı parantez içindeki yazı bulunamadı.");
     }
   }
 }
 
 // Copy function
 function copyToClipboard(tabId, text) {
-  // We copy the text using an interactive content command
+  // We copy the text using an interactive content command.
   chrome.scripting.executeScript({
     target: { tabId: tabId },
     function: copyText,
@@ -41,7 +41,7 @@ function copyToClipboard(tabId, text) {
   });
 }
 
-// Content command function
+//  Content command function
 function copyText(text) {
   const input = document.createElement("textarea");
   input.style.position = "fixed";
@@ -53,15 +53,12 @@ function copyText(text) {
   document.body.removeChild(input);
 }
 
-// Adding an item to the context menu
+// Adding an item to the right-click menu.
 chrome.contextMenus.create({
-  title: "Copy Coordinates",
+  title: "Copy Coordinate",
   contexts: ["selection"],
   id: "myContextMenu",
 });
 
-// Listening for the chrome.contextMenus.onClicked event
+// Listening to the chrome.contextMenus.onClicked event.
 chrome.contextMenus.onClicked.addListener(onContextMenuClick);
-
-
-
